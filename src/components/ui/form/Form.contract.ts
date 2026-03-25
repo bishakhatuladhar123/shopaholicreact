@@ -11,4 +11,5 @@ export interface ITextInputProps {
     className?:string;
     name:string;
     placeholder?:string;
+    errMsg?:string
 }

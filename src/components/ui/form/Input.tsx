@@ -2,7 +2,7 @@ export const TextInput=({type="text",clasName="border border-gray-300 w-full p-2
     return(
         <>
         <input type={type}  className={clasName} name={name} placeholder={`Enter you ${name}...`} />
-        <span className="text-red-800 tex-sm italic"></span>
+        <span className="text-red-800 tex-sm italic">{errMsg}</span>
         
         </>
     );

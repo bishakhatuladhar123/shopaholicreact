@@ -24,7 +24,7 @@ export default function LoginForm() {
                 </div>
             </div>
             <div className="flex w-full items-center justify-end">
-                <a href="/forget-password" className="text-teal-500 italic text-sm hover:underline hover:text-teal-600 transition hover:scale-96">Forget Password?</a>
+            <a href="/forget-password" className="text-teal-500 italic text-sm hover:underline hover:text-teal-600 transition hover:scale-96">Forget Password?</a>
             </div>
             <div className="flext w-full items-center gap-3">
                 <button className="rounded-md cursor-pointer transition hover:scale-98 hover:bg-red-700 w-full bg-red-800 text-white flex items-center justify-center p-2">

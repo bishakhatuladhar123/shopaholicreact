@@ -1,7 +1,7 @@
-export interface IUserNameType{
-    username?:string;
+export interface IUserNameType {
+    username?: string;
 }
 
-export interface ICredentials extends IUserNameType{
-    password?:string;
+export interface ICredentials extends IUserNameType {
+    password?: string;
 }
