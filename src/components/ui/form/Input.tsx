@@ -1,9 +1,18 @@
-export const TextInput=({type="text",clasName="border border-gray-300 w-full p-2 rounded-md shadow bg-white ",name="",placeholder="", errMsg=""})=>{
-    return(
+import type { ITextInputProps } from "./Form.contract";
+
+export const TextInput = ({type='text', name,className='',  placeholder="", errMsg="", handleChange }: Readonly<ITextInputProps>)=> {
+    
+    return (
         <>
-        <input type={type}  className={clasName} name={name} placeholder={`Enter you ${name}...`} />
-        <span className="text-red-800 tex-sm italic">{errMsg}</span>
-        
+            <input
+                 type={type}
+                name={name}
+                placeholder={`Enter your ${name}...`}
+                onChange={handleChange}
+                className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white  ${className}`}
+            />
+            <span className="text-red-800 text-sm italic">{errMsg}</span>
+
         </>
     );
 }

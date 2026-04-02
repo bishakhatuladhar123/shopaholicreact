@@ -1,15 +1,16 @@
-import type { HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode } from "react";
+import type { BaseSyntheticEvent, HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode } from "react";
 
 export interface IFormLabelProps{
     htmlfor?:string;
-    clasName?:string;
+    className?:string;
     children:ReactNode;
 }
 
 export interface ITextInputProps {
-    text:HTMLInputTypeAttribute;
+    type:HTMLInputTypeAttribute;
     className?:string;
     name:string;
     placeholder?:string;
-    errMsg?:string
+    errMsg?:string;
+    handleChange (e:BaseSyntheticEvent):void;
 }
