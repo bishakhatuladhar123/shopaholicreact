@@ -8,6 +8,6 @@ export interface ICredentials extends IUserNameType {
 }
 
 export const LoginSchema = z.object({
-    username:z.email().nonempty().nonoptional(),
-    password:z.string().nonempty().nonoptional(),
+    username:z.email().nonempty("Username is required.").nonoptional(),
+    password:z.string().nonempty("Password is required.").nonoptional(),
 })

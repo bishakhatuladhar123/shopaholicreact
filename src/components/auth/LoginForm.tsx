@@ -2,6 +2,8 @@ import { useState, type BaseSyntheticEvent } from "react";
 import { TextInput } from "../ui/form/Input";
 import { FormLabel } from "../ui/form/Label";
 import type { ICredentials } from "./Auth.contract";
+
+import { LoginSchema } from "./Auth.contract";
 export default function LoginForm() {
 
     const[credentials, setCredentials]= useState<ICredentials>({
@@ -17,8 +19,17 @@ export default function LoginForm() {
             [name]:value,
         });
     }
-    const login=(e:BaseSyntheticEvent)=>{
-        e.preventDefault()
+    const login=async(e:BaseSyntheticEvent)=>{
+        try{
+            e.preventDefault()
+            await LoginSchema.parseAsync(credentials)
+            console.log(credentials);
+        }
+        catch(exception)
+        {
+            console.log(exception);
+        }
+       
     }
     return (
         <form onSubmit={login} className="flex flex-col gap-5">
