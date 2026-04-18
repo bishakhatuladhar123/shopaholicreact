@@ -1,21 +1,30 @@
 import type { BaseSyntheticEvent } from "react";
 import type { IFileInputProps, ISelectOptionsProps, ISingleOption, ITextAreaProps, ITextInputProps } from "./Form.contract";
+import {Controller} from  "react-hook-form";
 
-export const TextInput = ({ type = 'text', name, className = '',  errMsg = "", handleChange }: Readonly<ITextInputProps>) => {
+export const TextInput =<T extends FieldValues> ({ type = 'text', name, className = '',  errMsg = "", control }: Readonly<ITextInputProps>) => {
     return (
-        <>
-            <input
+        <Controller
+        name={name}
+        control={control}
+        defaultValues={""}
+        render={({field})=>{
+            return(
+                <>
+                <input
                 type={type}
-                name={name}
+                {...field}
                 placeholder={`Enter your ${name}...`}
-                onChange={handleChange}
                 className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white  ${className}`}
-            />
+                />
             <span className="text-red-800 text-sm italic">{errMsg}</span>
-
-        </>
+                </>
+            );
+        }}
+        ></Controller>
     );
 }
+ 
 
 export const TextAreaInput = ({ name, className = '', errMsg = "", handleChange }: Readonly<ITextAreaProps>) => {
     return (

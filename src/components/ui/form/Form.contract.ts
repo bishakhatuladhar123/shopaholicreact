@@ -10,21 +10,21 @@ export interface IBaseType {
     className?: string;
     errMsg?: string;
 }
-export interface IFileInputProps extends IBaseType
+export interface IFileInputProps<T extends FieldValues> extends IBaseType
 {
-    handleChange(name:string, files:File|Array<File>):void;
+    control:Control<T>;
 }
-export interface ITextAreaProps extends IBaseType{
+export interface ITextAreaProps<T extends FieldValues>  extends IBaseType{
     rows?:number;
-    handleChange(e: BaseSyntheticEvent): void;
+    control:Control<T>
 }
-export interface ITextInputProps extends IBaseType{
+export interface ITextInputProps<T extends FieldValues>  extends IBaseType{
     type:HTMLInputTypeAttribute;
-    handleChange(e: BaseSyntheticEvent): void;
+control:Control<T>
 }
 export interface ISingleOption{label:string,value:string}
 
-export interface ISelectOptionsProps extends IBaseType {
+export interface ISelectOptionsProps<T extends FieldValues> extends IBaseType {
     options: Array<ISingleOption>;
-    handleChange(e: BaseSyntheticEvent): void;
+    control:Control<T>
 }
