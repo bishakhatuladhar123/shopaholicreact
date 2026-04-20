@@ -1,37 +1,49 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { TextInput } from "../ui/form/Input";
 import { FormLabel } from "../ui/form/Label";
-import type { credentials, IUserNameType } from "./Auth.contract";
+import type { IUsername } from "./Auth.contract";
+import z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+// import { useFormState } from "react-dom";
+import { CancelButton, SubmitButton } from "../ui/button/Button";
+import { LuSend, LuX } from "react-icons/lu";
+
+const ForgetPasswordSchema = z.object({
+    username: z.string().email("Invalid email address").min(1, "Email is required")
+    // username: z.email().nonempty().nonoptional()
+})
+
 export default function ForgetPasswordForm() {
 
-    const[credentials, setCredentails]= useState<IUserNameType>({
-        username:"",
+    const { control, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+        defaultValues:
+        {
+            username: ""
+        },
+        resolver: zodResolver(ForgetPasswordSchema)
     })
-    console.log(credentials);
+
+    const submitHandle = async (data: IUsername) => {
+        try {
+            console.log(data);
+        }
+        catch (exception) {
+            console.log(exception);
+        }
+    }
     return (
-        <form action="" className="flex flex-col gap-5">
+        <form onSubmit={handleSubmit(submitHandle)} className="flex flex-col gap-5">
             <div className="flex w-full items-center">
-                <FormLabel htmlfor="username" clasName="">UserName:</FormLabel>
+                <FormLabel htmlfor="username" className="">UserName:</FormLabel>
                 <div className="w-2/3 flex flex-col">
-                    <TextInput type="email" name="username" />
+                <TextInput control={control} errMsg={errors?.username?.message} type="email" name="username" />
                 </div>
             </div>
-            <div className="flex w-full items-center">
-                <FormLabel htmlfor="password">Password: </FormLabel>
-                <div className="w-2/3 flex flex-col">
-                    <TextInput type="password" name="username" />
-                </div>
-            </div>
-            
 
-            <div className="flext w-full items-center gap-3">
-                <button className="rounded-md cursor-pointer transition hover:scale-98 hover:bg-red-700 w-full bg-red-800 text-white flex items-center justify-center p-2">
-                    Reset
-                </button>
-                <button className="rounded-md cursor-pointer transition hover:scale-98 hover:bg-teal-700 w-full bg-teal-800 text-white flex items-center justify-center p-2">
-                    Submit
-                </button>
-
+            <div className="flex w-full items-center gap-3">
+                <CancelButton className="gap-2" disabled={isSubmitting}><LuX /> Reset</CancelButton>
+                <SubmitButton className="gap-2" disabled={isSubmitting}><LuSend /> Submit</SubmitButton>
             </div>
         </form>
     );

@@ -1,4 +1,3 @@
-// import { useState, type BaseSyntheticEvent } from "react";
 import { TextInput } from "../ui/form/Input";
 import { FormLabel } from "../ui/form/Label";
 
@@ -16,7 +15,6 @@ export default function LoginForm() {
        resolver:zodResolver(LoginSchema)
     })
     // console.log(credentials);
- 
 
     const login=async(credentials:ICredentials)=>{
         try{
@@ -26,7 +24,6 @@ export default function LoginForm() {
         {
             console.log(exception);
         }
-       
     }
  
     return (
@@ -46,7 +43,7 @@ export default function LoginForm() {
             <div className="flex w-full items-center justify-end">
             <a href="/forget-password" className="text-teal-500 italic text-sm hover:underline hover:text-teal-600 transition hover:scale-96">Forget Password?</a>
             </div>
-            <div className="flext w-full items-center gap-3">
+            <div className="flex w-full items-center gap-3">
                 <button  type="reset" className="rounded-md cursor-pointer transition hover:scale-98 hover:bg-red-700 w-full bg-red-800 text-white flex items-center justify-center p-2">
                     Reset
                 </button>

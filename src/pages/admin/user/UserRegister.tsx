@@ -4,6 +4,10 @@ import { FormLabel } from "../../../components/ui/form/Label";
 import { H2 } from "../../../components/ui/typography/PageTitle";
 import { CancelButton, SubmitButton } from "../../../components/ui/button/Button";
 
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import { UserRegisterSchema, type IUsername } from "../../../components/auth/Auth.contract";
+import type {  IUserRegister } from "../../../components/auth/Auth.contract";
 export default function UserRegister() {
 
     const [data, setData] = useState({
@@ -14,23 +18,21 @@ export default function UserRegister() {
         phone: "",
         image: ""
     })
-    const handleChange = (e: BaseSyntheticEvent) => {
-        e.preventDefault()
-        const { name, value } = e.target;
-        setData(
-            {
-                ...data,
-                [name]: value,
 
-            })
-    }
-
-    const handleFileChange = (name: string, file: File | Array<File>) => {
-        setData({
-            ...data,
-            [name]: file,
-        });
-    }
+    const {control,handleSubmit,formState:{errors}}=useForm<IUserRegister>({
+        defaultValues:
+        {
+            name:"",
+            email:"",
+            role:"",
+            gender:"",
+            phone:"",
+            address:"",
+            image:""
+        },
+        resolver:zodResolver(UserRegisterSchema)
+    })
+    
 
     return (
         <>
@@ -43,13 +45,13 @@ export default function UserRegister() {
                     <div className="flex">
                         <FormLabel htmlfor="name">Full Name:</FormLabel>
                         <div className="w-2/3 flex flex-col">
-                            <TextInput name="name" type="text" handleChange={handleChange} />
+                            <TextInput name="name" type="text" control={control} errMsg={errors?.name?.message}/>
                         </div>
                     </div>
                     <div className="flex">
                         <FormLabel htmlfor="email">Email (Username):</FormLabel>
                         <div className="w-2/3 flex flex-col">
-                            <TextInput name="email" type="email" handleChange={handleChange} />
+                            <TextInput name="email" type="email" control={control} errMsg={errors?.email?.message}/>
                         </div>
                     </div>
                     <div className="flex">
@@ -60,7 +62,7 @@ export default function UserRegister() {
                                     { label: "AdminUser", value: "admin" },
                                     { label: "User", value: "user" }
                                 ]}
-                                name='role' handleChange={handleChange}>
+                                name='role' control={control} errMsg={errors?.role?.message}>
 
                                 </SelectOptionInput>
                         </div>
@@ -74,27 +76,27 @@ export default function UserRegister() {
                                     { label: "Female", value: "female" },
                                     { label: "Other", value: "other" },
                                 ]}
-                                name='gender' handleChange={handleChange}></SelectOptionInput>
+                                name='gender' control={control} errMsg={errors?.gender?.message}></SelectOptionInput>
                         </div>
                     </div>
                     <div className="flex">
                         <FormLabel htmlfor="phone">Phone:</FormLabel>
                         <div className="w-2/3 flex flex-col">
-                            <TextInput name="phone" type="tel" handleChange={handleChange} />
+                            <TextInput name="phone" type="tel" control={control} errMsg={errors?.phone?.message}/>
                         </div>
                     </div>
 
                     <div className="flex">
                         <FormLabel htmlfor="address">Address:</FormLabel>
                         <div className="w-2/3 flex flex-col">
-                        <TextAreaInput name="address" handleChange={handleChange} />
+                        <TextAreaInput name="address" control={control} />
                         </div>
                     </div>
 
                     <div className="flex">
                         <FormLabel htmlfor="image">Image:</FormLabel>
                         <div className="w-2/3 flex flex-col">
-                        <FileInput name="image" handleChange={handleFileChange}/>
+                        <FileInput name="image" control={control}/>
                         </div>
                     </div>
 
