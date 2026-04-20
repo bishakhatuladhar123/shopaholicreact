@@ -9,10 +9,12 @@ import UserDashboard from "../pages/user/UserDashboard";
 import UserLayout from "../pages/layouts/UserLayout";
 import UserProfile from "../pages/user/UserProfile";
 import UserRegister from "../pages/admin/user/UserRegister";
+import ResetPassword from "../pages/auth/ResetPassword";
 
 const routerData = createBrowserRouter([
     { path: "/", element: <HomePage /> },
-    { path: "/forget-password", Component: ForgetPassword },
+    { path: "/ForgetPassword", Component: ForgetPassword },
+    { path: "/ResetPassword", Component: ResetPassword },
     {
         path: "/admin", element: <AdminLayout />, children: [
             { index: true, Component: AdminDashboard },
