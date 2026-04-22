@@ -19,7 +19,7 @@ const routerData = createBrowserRouter([
         path: "/admin", element: <AdminLayout />, children: [
             { index: true, Component: AdminDashboard },
             { path: "users", element: <UserList /> },
-            {path:"user/UserRegister",element :<UserRegister/>},
+            { path:"user/UserRegister",element :<UserRegister/>},
         ]
     },
     {
