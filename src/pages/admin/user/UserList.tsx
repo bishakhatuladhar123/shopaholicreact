@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router";
 import { H2 } from "../../../components/ui/typography/PageTitle";
-import { LuChevronLeft, LuChevronRight, LuPlus } from "react-icons/lu";
+import { LuChevronLeft, LuChevronRight, LuPen, LuPlus } from "react-icons/lu";
 
 export default function UserList() {
     return (
@@ -33,7 +33,8 @@ export default function UserList() {
                             <td className="p-2 border-r border-gray-500 border-b">Admin</td>
                             <td className="p-2 border-r border-gray-500 border-b">Active</td>
                             <td className="p-2 border-r border-gray-500 border-b">
-                                Edit / Delete
+                               <NavLink className={""} to={"/admin/user/123"}><LuPen/>
+                               </NavLink>
                             </td>
                         </tr>
                         <tr>
@@ -42,7 +43,8 @@ export default function UserList() {
                             <td className="p-2 border-r border-gray-500 border-b">User</td>
                             <td className="p-2 border-r border-gray-500 border-b">Active</td>
                             <td className="p-2 border-r border-gray-500 border-b">
-                                Edit / Delete
+                            <NavLink className={""} to={"/admin/user/1234"}><LuPen/>
+                            </NavLink>
                             </td>
                         </tr>
                     </tbody>
