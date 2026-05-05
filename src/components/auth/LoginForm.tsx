@@ -21,39 +21,15 @@ export default function LoginForm() {
      
     const login = async (credentials: ICredentials) => {
         try {
-            const response = {
-                token: "alphanumeric text"
-            }
-            //Local Storages
-            localStorage.setItem("token", response.token)
-            const tokenLocalStorage = localStorage.getItem("token");
-            console.log(tokenLocalStorage);
-            //localStorage.removeItem("token");
-            // localStorage.clear()
-
-            //session Storages
-            sessionStorage.setItem("token", response.token);
-            const tokenSessionStorage = sessionStorage.getItem("token");
-            console.log(tokenSessionStorage);
-            sessionStorage.clear();
-            sessionStorage.removeItem("token");
-
-            //cookies
-            // document.cookie="token="+response.token+"; expiresIn="+new Date()+"; path=/" //js default
-            Cookies.set("token", response.token, {
-                path: "/",
-                expires: 1,
-                secure: true,
-                sameSite: "Lax"
-            })
-            //get
-            const tokenCookie = Cookies.get('token');
-            console.log(tokenCookie);
-
-            //remove
-            Cookies.remove('token');
-
-            console.log(credentials);
+            
+            let response=await fetch(`${import.meta.env.VITE_APP_BASE_URL}auth/login`,{
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify(credentials)
+            });
+             response=await response.json()
+             console.log(response);
+ 
         }
         catch (exception) {
             console.log(exception);
@@ -65,7 +41,7 @@ export default function LoginForm() {
             <div className="flex w-full items-center">
                 <FormLabel htmlfor="username" className="">UserName:</FormLabel>
                 <div className="w-2/3 flex flex-col">
-                    <TextInput control={control} errMsg={errors?.username?.message} type="email" name="username" />
+                    <TextInput control={control} errMsg={errors?.username?.message} type="text" name="username" />
                 </div>
             </div>
             <div className="flex w-full items-center">

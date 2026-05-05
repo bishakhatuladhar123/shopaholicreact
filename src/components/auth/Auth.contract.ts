@@ -49,7 +49,7 @@ export interface IUserDetail {
   }
   
 export const LoginSchema = z.object({
-    username: z.email().nonempty("Username is required.").nonoptional(),
+    username: z.string().nonempty("Username is required.").nonoptional(),
     password: z.string().nonempty("Password is required.").nonoptional(),
 })
 
