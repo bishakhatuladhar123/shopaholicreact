@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import Cookies from "js-cookie";
+import axiosInstance from "../../config/ApiClient";
 export default function LoginForm() {
 
     const { control, handleSubmit, formState: { errors } } = useForm<ICredentials>({
@@ -21,13 +22,8 @@ export default function LoginForm() {
      
     const login = async (credentials: ICredentials) => {
         try {
-            
-            let response=await fetch(`${import.meta.env.VITE_APP_BASE_URL}auth/login`,{
-                method:"POST",
-                headers:{"Content-Type":"application/json"},
-                body:JSON.stringify(credentials)
-            });
-             response=await response.json()
+            const response=await axiosInstance.post('auth/login',credentials)
+             
              console.log(response);
  
         }
